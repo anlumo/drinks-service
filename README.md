@@ -11,3 +11,8 @@ Options:
   -l, --listen <LISTEN>                        [env: LISTEN=]
   -h, --help                                   Print help
 ```
+# Building the Docker Image
+
+```sh
+docker build -t drinks-service .
+```
