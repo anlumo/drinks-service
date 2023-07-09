@@ -67,6 +67,7 @@ async fn history(pool: Data<Pool<Postgres>>) -> actix_web::Result<Json<HistoryRe
 struct RankingResponseEntry {
     name: String,
     total: i64,
+    category: i16,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -125,7 +126,15 @@ async fn rankings(pool: Data<Pool<Postgres>>) -> actix_web::Result<Json<RankingR
                 log::error!("Database: {err}");
                 ErrorInternalServerError("Database")
             })?;
-            entries.push(RankingResponseEntry { name, total });
+            let category = row.try_get("category").map_err(|err| {
+                log::error!("Database: {err}");
+                ErrorInternalServerError("Database")
+            })?;
+            entries.push(RankingResponseEntry {
+                name,
+                total,
+                category,
+            });
         }
 
         category_data.push(RankingResponseCategory { category, entries })
