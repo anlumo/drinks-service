@@ -67,7 +67,7 @@ async fn history(pool: Data<Pool<Postgres>>) -> actix_web::Result<Json<HistoryRe
 struct RankingResponseEntry {
     name: String,
     total: i64,
-    category: i16,
+    category: Option<i16>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
