@@ -12,7 +12,7 @@ use urlencoding::encode;
 
 #[get("/")]
 async fn index() -> impl Responder {
-    format!("Hello!")
+    "Hello!"
 }
 
 #[derive(Debug, Serialize, Deserialize)]
